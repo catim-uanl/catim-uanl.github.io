@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CATIM — Cuerpo Académico Tecnología e Innovación Mecatrónica</title>
+<meta name="description" content="CATIM (UANL-CA-272), cuerpo académico consolidado de la Facultad de Ingeniería Mecánica y Eléctrica, UANL. Investigación en sistemas mecatrónicos, robótica móvil y percepción.">
+<meta property="og:title" content="CATIM — Tecnología e Innovación Mecatrónica">
+<meta property="og:description" content="Cuerpo académico consolidado (UANL-CA-272) de la FIME-UANL. Investigación en sistemas mecatrónicos, robótica móvil, percepción y cognición.">
+<meta property="og:image" content="assets/catim-seal.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#00763D">
+<link rel="icon" type="image/png" href="assets/catim-seal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="#top" class="brand">
+    <img src="assets/catim-seal.png" alt="Sello del CATIM" class="brand-seal">
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="topnav" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="topnav" id="topnav">
+    <a href="#quienes">Quiénes somos</a>
+    <a href="#lineas">Líneas</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#publicaciones">Publicaciones</a>
+    <a href="#noticias">Noticias</a>
+    <a href="#participa">Participa</a>
+    <a href="#contacto" class="topnav-cta">Contacto</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <img src="assets/catim-seal.png" alt="" class="hero-watermark" aria-hidden="true">
+    <div class="hero-inner reveal">
+      <p class="hero-eyebrow">Facultad de Ingeniería Mecánica y Eléctrica — Universidad Autónoma de Nuevo León</p>
+      <h1 id="hero-title">Cuerpo Académico Tecnología e Innovación Mecatrónica</h1>
+      <p class="hero-badge">Cuerpo académico consolidado · Registro UANL-CA-272 · PRODEP-SEP</p>
+      <div class="hero-actions">
+        <a href="#quienes" class="btn btn-primary">Conócenos</a>
+        <a href="#participa" class="btn btn-ghost">Formas de participar</a>
+      </div>
+    </div>
+    <div class="hero-logos reveal">
+      <img src="assets/uanl-logo.png" alt="Universidad Autónoma de Nuevo León" class="hero-logo hero-logo--wide">
+      <img src="assets/fime-logo.png" alt="Facultad de Ingeniería Mecánica y Eléctrica" class="hero-logo hero-logo--wide">
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,72 1440,24 L1440,80 L0,80 Z" fill="var(--blanco)"></path>
+    </svg>
+  </section>
+
+  <!-- QUIENES SOMOS -->
+  <section class="section section--white" id="quienes" aria-labelledby="quienes-title">
+    <div class="section-head reveal">
+      <h2 id="quienes-title">Quiénes somos</h2>
+    </div>
+    <div class="two-col">
+      <div class="two-col-body reveal">
+        <p>El CATIM es un cuerpo académico adscrito a la FIME, con número de registro <strong>UANL-CA-272</strong>, reconocido por el Programa para el Desarrollo Profesional Docente (PRODEP) de la SEP con nivel <strong>Consolidado</strong>.</p>
+        <p>Está formado por profesores-investigadores con reconocimiento nacional, que cuentan con productos de investigación de calidad, amplia experiencia en docencia y en formación de recursos humanos, y un alto compromiso con la institución. Colaboramos entre nosotros, con nuestros estudiantes y con otros investigadores.</p>
+      </div>
+      <div class="two-col-aside reveal">
+        <h3 class="aside-title">Programas educativos en los que participamos</h3>
+        <div class="program-group">
+          <h4>Posgrado</h4>
+          <ul class="program-list">
+            <li>Doctorado en Ingeniería Eléctrica</li>
+            <li>Maestría en Ciencias de la Ingeniería Eléctrica</li>
+            <li>Doctorado en Inteligencia Artificial y Optimización</li>
+            <li>Maestría en Inteligencia Artificial y Optimización</li>
+          </ul>
+        </div>
+        <div class="program-group">
+          <h4>Licenciatura</h4>
+          <ul class="program-list">
+            <li>Ingeniería Mecatrónica</li>
+            <li>Ingeniería en Inteligencia Artificial</li>
+            <li>Ingeniería en Automatización y Sistemas Inteligentes</li>
+            <li>Ingeniería Biomédica</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISION Y VISION -->
+  <section class="section section--green section--wavy" aria-labelledby="mv-title">
+    <h2 id="mv-title" class="sr-only">Misión y visión</h2>
+    <div class="mv-grid">
+      <article class="mv-card reveal">
+        <h3>Misión</h3>
+        <p>Realizar investigación, formación de recursos humanos y desarrollo tecnológico acerca de sistemas mecatrónicos.</p>
+      </article>
+      <article class="mv-card reveal">
+        <h3>Visión</h3>
+        <p>Ser un cuerpo académico consolidado, reconocido por su contribución en investigación, desarrollos tecnológicos y en la formación de recursos humanos.</p>
+      </article>
+    </div>
+    <svg class="section-wave section-wave--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,20 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="var(--blanco)"></path>
+    </svg>
+  </section>
+
+  <!-- LINEAS DE INVESTIGACION -->
+  <section class="section section--white" id="lineas" aria-labelledby="lineas-title">
+    <div class="section-head reveal">
+      <h2 id="lineas-title">Líneas de investigación</h2>
+      <p class="section-lede">Las líneas de investigación se asocian a proyectos, actividades o estudios que profundizan en el conocimiento, con objetivos y metas de carácter académico, orientados a aplicaciones innovadoras en beneficio de la sociedad. Uno de los principales objetivos del CATIM es realizar investigación científica en áreas afines a la mecatrónica.</p>
+    </div>
+    <div class="line-grid">
+      <article class="line-card reveal">
+        <svg class="line-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="24" cy="24" r="7" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M24 4v6M24 38v6M44 24h-6M10 24H4M37.6 10.4l-4.2 4.2M14.6 33.4l-4.2 4.2M37.6 37.6l-4.2-4.2M14.6 14.6l-4.2-4.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <h3>Análisis, control y diseño de sistemas mecatrónicos</h3>
+        <p>Por ejemplo: sistemas biomecatrónicos para restaurar funciones neuromotrices, análisis y control de sistemas de alta dimensión o de dinámica no lineal altamente compleja, análisis de biomecánica articular, diseño e implementación de dispositivos de asistencia, diseño de esquemas de control de mecanismos articulados, instrumentación, procesamiento de señales electrofisiológicas y diseño de interfaces cerebro-computadora, entre otros.</p>
+      </article>
+      <article class="line-card reveal">
+        <svg class="line-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="14" y="8" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2.2"/>
+          <circle cx="19" cy="15" r="1.8" fill="currentColor"/>
+          <circle cx="29" cy="15" r="1.8" fill="currentColor"/>
+          <path d="M24 24v6M16 40l4-8h8l4 8M10 30l4-4M38 30l-4-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Robótica móvil, percepción y cognición</h3>
+        <p>Por ejemplo: autonomía, navegación y toma de decisiones en vehículos autónomos, enjambres de robots, algoritmos bioinspirados, y análisis y control de robots, entre otros.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section class="section section--tint" id="equipo" aria-labelledby="equipo-title">
+    <div class="section-head reveal">
+      <h2 id="equipo-title">Cuerpo académico</h2>
+    </div>
+    <div class="team-grid">
+
+      <article class="member reveal">
+        <div class="member-photo">
+          <img src="assets/juan.png" alt="Dr. Juan Ángel Rodríguez Liñán" loading="lazy">
+        </div>
+        <div class="member-body">
+          <h3>Dr. Juan Ángel Rodríguez Liñán</h3>
+          <p class="member-line">Análisis, estimación, control e instrumentación en sistemas dinámicos, robótica y biomecatrónica.</p>
+          <p class="member-contact"><a href="mailto:angel.rodriguezln@uanl.edu.mx">angel.rodriguezln@uanl.edu.mx</a></p>
+          <div class="member-social">
+            <a href="https://scholar.google.com/citations?user=bTaPGigAAAAJ&hl=es&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
+            <a href="https://orcid.org/0000-0002-0204-4424" target="_blank" rel="noopener">ORCID</a>
+            <a href="https://www.researchgate.net/profile/Angel-Rodriguez-Linan" target="_blank" rel="noopener">ResearchGate</a>
+            <a href="https://www.uanl.mx/investigadores/juan-angel-rodriguez-linan/" target="_blank" rel="noopener">Perfil UANL</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="member reveal">
+        <div class="member-photo">
+          <img src="assets/griselda.png" alt="Dra. Griselda Quiroz Compeán" loading="lazy">
+        </div>
+        <div class="member-body">
+          <h3>Dra. Griselda Quiroz Compeán</h3>
+          <p class="member-line">Desarrollo de modelos in silico orientados a paciente, diseño de sistemas fisiológicos de control y dispositivos médicos.</p>
+          <p class="member-contact"><a href="mailto:griselda.quirozcm@uanl.edu.mx">griselda.quirozcm@uanl.edu.mx</a></p>
+          <div class="member-social">
+            <a href="https://scholar.google.com/citations?user=dcNqkOQAAAAJ&hl=es&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
+            <a href="https://orcid.org/0000-0002-4910-2521" target="_blank" rel="noopener">ORCID</a>
+            <a href="https://www.researchgate.net/profile/Griselda-Quiroz-Compean-2" target="_blank" rel="noopener">ResearchGate</a>
+            <a href="https://www.uanl.mx/investigadores/griselda-quiroz-compean/" target="_blank" rel="noopener">Perfil UANL</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="member reveal">
+        <div class="member-photo">
+          <img src="assets/luis.png" alt="Dr. Luis Martín Torres Treviño" loading="lazy">
+        </div>
+        <div class="member-body">
+          <h3>Dr. Luis Martín Torres Treviño</h3>
+          <p class="member-line">Modelado y optimización con sistemas inteligentes, máquinas de aprendizaje autónomo e inteligencia artificial.</p>
+          <p class="member-contact"><a href="mailto:luis.torrestrv@uanl.edu.mx">luis.torrestrv@uanl.edu.mx</a></p>
+          <div class="member-social">
+            <a href="https://scholar.google.co.uk/citations?hl=en&user=AnIoD4QAAAAJ&view_op=list_works" target="_blank" rel="noopener">Google Scholar</a>
+            <a href="https://orcid.org/0000-0002-8072-6033" target="_blank" rel="noopener">ORCID</a>
+            <a href="https://www.researchgate.net/profile/L-Torres-Trevino" target="_blank" rel="noopener">ResearchGate</a>
+            <a href="https://www.uanl.mx/investigadores/luis-martin-torres-trevino/" target="_blank" rel="noopener">Perfil UANL</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="member reveal">
+        <div class="member-photo">
+          <img src="assets/erick.png" alt="Dr. Erick de Jesús Ordaz Rivas" loading="lazy">
+        </div>
+        <div class="member-body">
+          <h3>Dr. Erick de Jesús Ordaz Rivas</h3>
+          <p class="member-line">Robótica de enjambres, sistemas autónomos y aplicaciones con inteligencia artificial.</p>
+          <p class="member-contact"><a href="mailto:erick.ordazrv@uanl.edu.mx">erick.ordazrv@uanl.edu.mx</a></p>
+          <div class="member-social">
+            <a href="https://scholar.google.com/citations?user=YJiv3ZEAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+            <a href="https://orcid.org/0000-0002-4728-7833" target="_blank" rel="noopener">ORCID</a>
+            <a href="https://www.researchgate.net/profile/Erick-Ordaz-Rivas" target="_blank" rel="noopener">ResearchGate</a>
+            <a href="https://www.uanl.mx/investigadores/erick-de-jesus-ordaz-rivas/" target="_blank" rel="noopener">Perfil UANL</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PUBLICACIONES -->
+  <section class="section section--white" id="publicaciones" aria-labelledby="pub-title">
+    <div class="section-head reveal">
+      <h2 id="pub-title">Publicaciones destacadas</h2>
+    </div>
+    <ol class="pub-list reveal">
+      <li>
+        <span class="pub-year">2026</span>
+        <div class="pub-body">
+          <h3>Multi-objective optimization in autonomous foraging using swarm robots</h3>
+          <p class="pub-meta">Ordáz-Rivas, E. J., Rodríguez-Liñán, A., Torres-Treviño, L. M. · Swarm and Evolutionary Computation, 101, 102294</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1016/j.swevo.2026.102294" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2026</span>
+        <div class="pub-body">
+          <h3>Handwritten signature recognition using Fraunhofer diffraction pattern</h3>
+          <p class="pub-meta">Torres López, C. S., Gómez Correa, J. E., Rodríguez-Liñán, A. et al. · Optical Engineering, 65(1), 013101</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1117/1.OE.65.1.013101" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2024</span>
+        <div class="pub-body">
+          <h3>Improving performance in swarm robots using multi-objective optimization</h3>
+          <p class="pub-meta">Ordaz-Rivas, E., Torres-Treviño, L. · Mathematics and Computers in Simulation, 223, 433–457</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1016/j.matcom.2024.04.027" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2024</span>
+        <div class="pub-body">
+          <h3>Vision Algorithm to Compute Pupil Parameters: Towards Non-invasive Estimation of Intracranial Pressure</h3>
+          <p class="pub-meta">De La Rosa Hernández, G. A., Morales Gómez, J. A., Quiroz Compean, G., Torres Treviño, L. M. · XLVI Mexican Conference on Biomedical Engineering</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1007/978-3-031-46933-6_20" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2024</span>
+        <div class="pub-body">
+          <h3>Spatial characterization of functional neural activity during lower limb motion through functional connectivity</h3>
+          <p class="pub-meta">Espinoza-Valdez, A., Quiroz-Compean, G., González-Garrido, A. A., et al. · Biocybernetics and Biomedical Engineering, 44(1), 183–196</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1016/j.bbe.2024.01.003" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2024</span>
+        <div class="pub-body">
+          <h3>Robotics and Mechatronics Engineering Framework to Develop a Senior Capstone Design Project: A Biomedical Mechatronics Engineering Case Study</h3>
+          <p class="pub-meta">Forsberg, P., Guerra-Zubiaga, D. A., Hantouli, F., Esmaeili, A., Quiroz-Compean, G. · 2024 ASEE South East Section Meeting</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.18260/1-2--45557" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2021</span>
+        <div class="pub-body">
+          <h3>Autonomous foraging with a pack of robots based on repulsion, attraction and influence</h3>
+          <p class="pub-meta">Ordaz-Rivas, E., Rodríguez-Liñán, A., Torres-Treviño, L. · Autonomous Robots, 45(6), 919–935</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1007/s10514-021-09994-5" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2021</span>
+        <div class="pub-body">
+          <h3>Flock of Robots with Self-Cooperation for Prey-Predator Task</h3>
+          <p class="pub-meta">Ordaz-Rivas, E., Rodríguez-Liñán, A., Torres-Treviño, L. · Journal of Intelligent &amp; Robotic Systems, 101, 39</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1007/s10846-020-01283-0" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2021</span>
+        <div class="pub-body">
+          <h3>Stability analysis in COVID-19 within-host model with immune response</h3>
+          <p class="pub-meta">Almocera, A. E. S., Quiroz, G., Hernandez-Vargas, E. A. · Communications in Nonlinear Science and Numerical Simulation, 95, 105584</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1016/j.cnsns.2020.105584" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+      <li>
+        <span class="pub-year">2019</span>
+        <div class="pub-body">
+          <h3>Collective Tasks for a Flock of Robots Using Influence Factor</h3>
+          <p class="pub-meta">Ordaz-Rivas, E., Rodríguez-Liñán, A., Aguilera-Ruíz, M., Torres-Treviño, L. · Journal of Intelligent &amp; Robotic Systems, 94, 439–453</p>
+        </div>
+        <a class="pub-link" href="https://doi.org/10.1007/s10846-018-0941-2" target="_blank" rel="noopener">DOI ↗</a>
+      </li>
+    </ol>
+  </section>
+
+  <!-- NOTICIAS -->
+  <section class="section section--tint" id="noticias" aria-labelledby="noticias-title">
+    <div class="section-head reveal">
+      <h2 id="noticias-title">Noticias y actividades</h2>
+    </div>
+    <div class="social-single reveal">
+      <div class="social-embed">
+        <p class="social-embed-label">Facebook</p>
+        <iframe
+          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fcatim.uanl&tabs=timeline&width=560&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
+          width="100%" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+          allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          title="Feed de Facebook de CATIM"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTICIPA -->
+  <section class="section section--white" id="participa" aria-labelledby="participa-title">
+    <div class="section-head reveal">
+      <h2 id="participa-title">Formas de participar</h2>
+    </div>
+    <div class="participate-grid">
+      <article class="participate-card reveal">
+        <span class="participate-tag">Licenciatura</span>
+        <h3>Estudiantes de licenciatura</h3>
+        <ul>
+          <li><strong>Verano científico</strong> (PROVERICYT, AMC, Delfín): seleccionando nuestros proyectos.</li>
+          <li><strong>Unidades de aprendizaje:</strong> como estudiante inscrito en nuestros grupos.</li>
+          <li><strong>Servicio social o prácticas profesionales</strong> (&gt;153 créditos, FIME): envíanos correo a inicio del semestre anterior.</li>
+          <li><strong>Estancia de investigación</strong> (10° semestre): envíanos correo durante el semestre anterior.</li>
+          <li><strong>Tesis de licenciatura</strong> (9°, 10° semestre): envíanos correo un semestre antes para plantear el protocolo.</li>
+        </ul>
+      </article>
+      <article class="participate-card reveal">
+        <span class="participate-tag">Posgrado</span>
+        <h3>Estudiantes de posgrado</h3>
+        <ul>
+          <li><strong>Tesis de posgrado</strong> (egresados): inscribiéndote en el Posgrado en Ingeniería Eléctrica, línea de diseño e implementación de sistemas mecatrónicos.</li>
+          <li><strong>O bien</strong>, inscribiéndote en el Posgrado en Inteligencia Artificial y Optimización.</li>
+        </ul>
+      </article>
+      <article class="participate-card reveal">
+        <span class="participate-tag">Vinculación</span>
+        <h3>Instituciones y empresas</h3>
+        <ul>
+          <li><strong>Consultoría, capacitación</strong> o apoyo en el desarrollo de proyectos tecnológicos.</li>
+          <li><strong>Contáctanos</strong> para platicarnos tu necesidad y explorar cómo colaborar.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section section--green" id="contacto" aria-labelledby="contacto-title">
+    <div class="contact-grid reveal">
+      <div>
+        <h2 id="contacto-title">Contacto</h2>
+        <p>¿Te interesa colaborar, realizar una estancia o conocer más sobre nuestras líneas de investigación? Escríbenos.</p>
+        <a class="btn btn-light" href="mailto:erick.ordazrv@uanl.edu.mx">Escribir por correo</a>
+      </div>
+      <div class="contact-social">
+        <p class="contact-social-label">Síguenos</p>
+        <a href="https://www.instagram.com/catim.uanl/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/catim.uanl" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com/@catimuanl" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.whatsapp.com/channel/0029VbAknRyIiRoku8P7SU2E" target="_blank" rel="noopener">Canal de WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+    <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<footer class="site-footer">
+  <img src="assets/uanl-logo.png" alt="UANL" class="footer-logo">
+  <img src="assets/fime-logo.png" alt="FIME" class="footer-logo">
+  <p>Cuerpo Académico Tecnología e Innovación Mecatrónica (UANL-CA-272) · Facultad de Ingeniería Mecánica y Eléctrica · Universidad Autónoma de Nuevo León</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
