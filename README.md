@@ -1,37 +1,68 @@
 # Sitio web — CATIM (UANL-CA-272)
 
-Sitio estático (HTML/CSS/JS puro, sin build). Archivos:
+Sitio del Cuerpo Académico Tecnología e Innovación Mecatrónica, FIME-UANL.
+Publicado en GitHub Pages. Es un sitio estático (HTML/CSS/JS puro, sin build,
+sin dependencias de servidor).
 
-- `index.html` — contenido y estructura.
-- `styles.css` — estilos (paleta verde/plateado/blanco).
-- `script.js` — solo abre/cierra el menú en móvil.
-- `assets/` — logos y fotos reales:
-  - `catim-seal.png`, `uanl-logo.png`, `fime-logo.png` (los que subiste, con fondo transparente donde aplicaba)
-  - `juan.jpg`, `griselda.jpg`, `luis.jpg`, `erick.jpg` — las fotos que enviaste, ya con un fondo plateado degradado (las originales eran PNG transparentes; les puse fondo para que se vean uniformes en las tarjetas del equipo)
+## Estructura del proyecto
 
-## Cómo verlo localmente
-Abre `index.html` en el navegador. No necesita servidor.
+```
+index.html      → contenido y estructura de todas las secciones
+styles.css      → estilos (paleta verde institucional / plateado / blanco)
+script.js       → menú móvil, animaciones al hacer scroll, botón "volver arriba"
+assets/
+  catim-seal.png    → sello del CATIM (navbar, marca de agua del hero, footer, favicon)
+  uanl-logo.png      → logo de la UANL
+  fime-logo.png      → logo de la FIME
+  juan.png, griselda.png, luis.png, erick.png → fotos del cuerpo académico
+```
 
-## Cómo publicarlo
-- **GitHub Pages**: sube la carpeta completa (incluyendo `assets/`) a un repo y activa Pages.
-- **Netlify / Vercel**: arrastra la carpeta completa a su panel.
-- **Hosting de la UANL/FIME**: sube todo por FTP manteniendo la estructura de carpetas.
+## Cómo editar y publicar cambios
 
-## Cambios de esta vuelta
-- Se quitó la sección "Qué hacemos" y el párrafo largo del hero (queda solo un badge corto: "Cuerpo académico consolidado · Registro UANL-CA-272 · PRODEP-SEP").
-- "Programas educativos" ahora está agrupado en Posgrado / Licenciatura en vez de una lista plana.
-- Se quitó la frase con guiones largos en "Líneas de investigación" y la frase introductoria de "Publicaciones destacadas".
-- Publicaciones: ahora son 10, ordenadas de la más reciente (2026) a la más antigua, cubriendo a los 4 integrantes.
-- Noticias: solo Facebook (en vivo, sin necesitar token). Instagram se quitó por ahora, como pediste.
-- Formas de participar: cada tarjeta tiene una etiqueta (Licenciatura / Posgrado / Vinculación) y los términos clave en negritas para escanear más rápido.
-- Fotos y logos reales integrados en todo el sitio (navbar, hero, equipo, footer).
+Como el sitio ya vive en GitHub Pages, el flujo normal es:
 
-## Pendiente / a considerar
-- **Instagram**: como se quitó "por ahora", cuando quieras reactivarlo la opción más simple sigue siendo un widget como LightWidget o SnapWidget (gratuitos), ya que Instagram no ofrece un embed público sin token del API de Meta (Facebook sí lo ofrece, por eso ese widget funciona solo).
-- **Publicaciones**: es una selección curada de los perfiles de Google Scholar de los 4 integrantes — no hay forma de generarla 100% automática sin revisarla manualmente cada semestre, ya que Google Scholar no tiene un API público gratuito.
+1. Clona el repositorio (o haz `git pull` si ya lo tienes clonado).
+2. Edita `index.html`, `styles.css` o `script.js` con cualquier editor.
+3. Guarda, y sube el cambio:
+   ```
+   git add .
+   git commit -m "Describe aquí el cambio"
+   git push
+   ```
+4. GitHub Pages reconstruye el sitio automáticamente en uno o dos minutos.
 
-## Colores usados
+No hay paso de "build": lo que subas a la rama publicada es exactamente lo que
+se ve en línea. Si algo no se refleja después de un par de minutos, revisa en
+la pestaña **Actions** del repositorio si el deploy de Pages falló.
+
+## Limitaciones técnicas conocidas
+
+- **Instagram**: no tiene feed en vivo embebido. Instagram no ofrece, como sí
+  lo hace Facebook, un widget público sin necesitar un token del API de Meta.
+  Si más adelante lo quieren, la opción más simple sigue siendo un servicio
+  gratuito como LightWidget o SnapWidget.
+- **Ancho del feed de Facebook**: el widget oficial de Meta ("Page Plugin") no
+  siempre estira su contenido interno al 100% del contenedor aunque el
+  `<iframe>` sea más ancho — es una limitación del propio widget de Facebook,
+  no del sitio.
+- **Publicaciones destacadas**: es una selección curada a mano de los perfiles
+  de Google Scholar de los 4 integrantes, no una lista generada
+  automáticamente — Google Scholar no ofrece un API público gratuito para
+  eso, así que hay que revisarla y actualizarla manualmente de vez en cuando.
+
+## Colores de marca
+
 - Verde institucional: `#00763D`
 - Verde oscuro (hover, títulos): `#01532B`
 - Plateado: `#C7CCC9` (variante clara `#F1F2F0`)
 - Blanco: `#FFFFFF`
+
+## Notas de diseño
+
+- Tipografía: Source Serif 4 (títulos) + Inter (cuerpo), vía Google Fonts.
+- Fotos del equipo en marco circular de doble anillo (verde + plateado), sobre
+  fondo degradado — pensado para fotos PNG con transparencia.
+- Animaciones de aparición al hacer scroll en la mayoría de las secciones;
+  respetan `prefers-reduced-motion` para quienes prefieren menos movimiento.
+- El ajuste fino de las animaciones vive en `styles.css`, bajo el bloque
+  `/* ---------- scroll reveal ---------- */`.
