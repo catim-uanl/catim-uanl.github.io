@@ -149,9 +149,8 @@ li { margin-bottom: 0.5em; }
 .hero-watermark {
   position: absolute;
   top: 50%; left: 50%;
-  height: min(80vh, 740px);
-  width: auto;
-  max-width: 92vw;
+  width: min(1100px, 150vw);
+  height: auto;
   transform: translate(-50%, -50%);
   opacity: 0.13;
   pointer-events: none;
@@ -262,7 +261,15 @@ li { margin-bottom: 0.5em; }
 @media (min-width: 900px) {
   .two-col { grid-template-columns: 1fr 1fr; }
 }
-.two-col-body p { color: var(--texto-suave); max-width: none; text-align: justify; hyphens: auto; }
+.two-col-body p {
+  color: var(--texto-suave);
+  max-width: none;
+  text-align: justify;
+  text-align-last: left;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 .two-col-aside {
   background: var(--verde-suave);
   border: 1px solid var(--borde);
@@ -317,7 +324,15 @@ li { margin-bottom: 0.5em; }
   padding: 1.8rem;
 }
 .mv-card h3 { margin-bottom: 0.6rem; }
-.mv-card p { margin: 0; max-width: none; }
+.mv-card p {
+  margin: 0;
+  max-width: none;
+  text-align: justify;
+  text-align-last: left;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 
 /* ---------- lineas de investigacion ---------- */
 .line-grid {
@@ -336,7 +351,17 @@ li { margin-bottom: 0.5em; }
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 .line-card:hover { box-shadow: 0 10px 26px rgba(1,83,43,0.1); transform: translateY(-2px); }
-.line-card p { color: var(--texto-suave); font-size: 0.95rem; margin: 0; max-width: none; text-align: justify; hyphens: auto; }
+.line-card p {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  margin: 0;
+  max-width: none;
+  text-align: justify;
+  text-align-last: left;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 
 /* ---------- equipo ---------- */
 .team-grid {
@@ -496,6 +521,14 @@ li { margin-bottom: 0.5em; }
   margin: 0 auto;
 }
 @media (min-width: 760px) { .contact-grid { grid-template-columns: 1.3fr 0.7fr; } }
+.contact-grid p {
+  max-width: none;
+  text-align: justify;
+  text-align-last: left;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
 .contact-social { display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
 .contact-social-label {
   font-weight: 700;
