@@ -262,7 +262,7 @@ li { margin-bottom: 0.5em; }
 @media (min-width: 900px) {
   .two-col { grid-template-columns: 1fr 1fr; }
 }
-.two-col-body p { color: var(--texto-suave); max-width: none; }
+.two-col-body p { color: var(--texto-suave); max-width: none; text-align: justify; hyphens: auto; }
 .two-col-aside {
   background: var(--verde-suave);
   border: 1px solid var(--borde);
@@ -336,7 +336,7 @@ li { margin-bottom: 0.5em; }
   transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 .line-card:hover { box-shadow: 0 10px 26px rgba(1,83,43,0.1); transform: translateY(-2px); }
-.line-card p { color: var(--texto-suave); font-size: 0.95rem; margin: 0; max-width: none; }
+.line-card p { color: var(--texto-suave); font-size: 0.95rem; margin: 0; max-width: none; text-align: justify; hyphens: auto; }
 
 /* ---------- equipo ---------- */
 .team-grid {
