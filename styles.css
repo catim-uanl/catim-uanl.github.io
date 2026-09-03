@@ -683,6 +683,7 @@ li { margin-bottom: 0.5em; }
   gap: 1.3rem;
   margin-top: 1.6rem;
 }
+.contact-form[hidden] { display: none; }
 .form-field {
   display: flex;
   flex-direction: column;
@@ -749,6 +750,19 @@ li { margin-bottom: 0.5em; }
 }
 .form-status--ok { color: var(--verde); }
 .form-status--error { color: #B3261E; }
+
+.form-confirmation {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--verde);
+}
+.form-confirmation[hidden] { display: none; }
+.form-confirmation h3 { color: var(--verde-oscuro); margin: 0; }
+.form-confirmation p { color: var(--texto-suave); max-width: 42ch; margin: 0; }
 
 /* ---------- footer ---------- */
 .site-footer {

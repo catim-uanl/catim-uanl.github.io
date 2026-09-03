@@ -191,18 +191,23 @@
   const form = document.getElementById("contactForm");
   const status = document.getElementById("contactFormStatus");
   const submitBtn = document.getElementById("contactFormSubmit");
-  if (!form || !status || !submitBtn) return;
+  const confirmacion = document.getElementById("contactFormConfirmation");
+  if (!form || !status || !submitBtn || !confirmacion) return;
 
   const endpointConfigurado =
     GOOGLE_SHEETS_ENDPOINT.startsWith("https://script.google.com/");
   if (!endpointConfigurado) return; // usa el respaldo por correo (FormSubmit)
 
-  function bloquearFormulario() {
-    // Deja todo el formulario deshabilitado hasta que se recargue la
-    // página, para que no se pueda enviar una segunda respuesta.
-    Array.prototype.forEach.call(form.elements, function (campo) {
-      campo.disabled = true;
-    });
+  let yaSeMostroConfirmacion = false;
+
+  function mostrarConfirmacion() {
+    // Puede llamarse dos veces (cuando el fetch resuelve y, si tarda
+    // demasiado, cuando se cumple el tiempo de espera de respaldo).
+    // Solo debe actuar una vez.
+    if (yaSeMostroConfirmacion) return;
+    yaSeMostroConfirmacion = true;
+    form.hidden = true;
+    confirmacion.hidden = false;
   }
 
   form.addEventListener("submit", function (event) {
@@ -218,25 +223,19 @@
     // interpreta de forma más confiable en "e.parameter".
     const datos = new URLSearchParams(new FormData(form));
 
+    // Con "no-cors" el navegador no deja leer la respuesta real, y en la
+    // práctica el fetch a veces nunca "resuelve" del todo aunque el dato
+    // ya haya llegado a la hoja (por cómo Google redirige la respuesta).
+    // Por eso no dependemos solo de que el fetch termine: si no resuelve
+    // en 3 segundos, mostramos la confirmación de todos modos.
     fetch(GOOGLE_SHEETS_ENDPOINT, {
       method: "POST",
       mode: "no-cors",
       body: datos,
     })
-      .then(function () {
-        // "no-cors" no permite leer la respuesta real, así que asumimos
-        // éxito si la petición no lanzó un error de red.
-        status.textContent = "¡Gracias! Tu mensaje se envió correctamente.";
-        status.className = "form-status form-status--ok";
-        submitBtn.hidden = true;
-        bloquearFormulario();
-      })
-      .catch(function () {
-        status.textContent =
-          "No se pudo enviar. Por favor intenta de nuevo o escribe a angel.rodriguezln@uanl.edu.mx.";
-        status.className = "form-status form-status--error";
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Enviar";
-      });
+      .then(mostrarConfirmacion)
+      .catch(mostrarConfirmacion);
+
+    setTimeout(mostrarConfirmacion, 3000);
   });
 })();
