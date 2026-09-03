@@ -69,11 +69,17 @@
 })();
 
 /* Carrusel del hero: cambia de foto automáticamente cada 5s con fundido.
-   Si una foto (f1.jpg ... f10.jpg) no existe todavía, su <img> se autoelimina
-   (ver onerror en el HTML) y el carrusel simplemente la salta.
+   Si una foto (f1.jpg ... f10.jpg, o m1.jpg ... m10.jpg en celular) no
+   existe todavía, su <img> se autoelimina (ver onerror en el HTML) y el
+   carrusel simplemente la salta.
+   En pantallas de hasta 700px de ancho usa el set de fotos "m" (pensado
+   para celular); en pantallas más anchas usa el set "f" (computadora).
    Respeta prefers-reduced-motion (deja la primera foto fija, sin autoplay). */
 (function () {
-  const carousel = document.querySelector(".hero-carousel");
+  const esCelular = window.matchMedia("(max-width: 700px)").matches;
+  const carousel = document.querySelector(
+    esCelular ? ".hero-carousel--mobile" : ".hero-carousel--desktop"
+  );
   const dotsWrap = document.getElementById("heroDots");
   if (!carousel) return;
 
@@ -191,6 +197,14 @@
     GOOGLE_SHEETS_ENDPOINT.startsWith("https://script.google.com/");
   if (!endpointConfigurado) return; // usa el respaldo por correo (FormSubmit)
 
+  function bloquearFormulario() {
+    // Deja todo el formulario deshabilitado hasta que se recargue la
+    // página, para que no se pueda enviar una segunda respuesta.
+    Array.prototype.forEach.call(form.elements, function (campo) {
+      campo.disabled = true;
+    });
+  }
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -199,7 +213,10 @@
     status.textContent = "";
     status.className = "form-status";
 
-    const datos = new FormData(form);
+    // Se manda como application/x-www-form-urlencoded (vía URLSearchParams)
+    // en vez de FormData/multipart: es el formato que Google Apps Script
+    // interpreta de forma más confiable en "e.parameter".
+    const datos = new URLSearchParams(new FormData(form));
 
     fetch(GOOGLE_SHEETS_ENDPOINT, {
       method: "POST",
@@ -209,18 +226,15 @@
       .then(function () {
         // "no-cors" no permite leer la respuesta real, así que asumimos
         // éxito si la petición no lanzó un error de red.
-        form.reset();
-        document.getElementById("cf-campo-correo").hidden = false;
-        document.getElementById("cf-campo-whatsapp").hidden = true;
         status.textContent = "¡Gracias! Tu mensaje se envió correctamente.";
         status.className = "form-status form-status--ok";
+        submitBtn.hidden = true;
+        bloquearFormulario();
       })
       .catch(function () {
         status.textContent =
           "No se pudo enviar. Por favor intenta de nuevo o escribe a angel.rodriguezln@uanl.edu.mx.";
         status.className = "form-status form-status--error";
-      })
-      .finally(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = "Enviar";
       });

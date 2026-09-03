@@ -177,6 +177,11 @@ li { margin-bottom: 0.5em; }
   z-index: 0;
   background: var(--verde-oscuro);
 }
+.hero-carousel--mobile { display: none; }
+@media (max-width: 700px) {
+  .hero-carousel--desktop { display: none; }
+  .hero-carousel--mobile { display: block; }
+}
 .hero-slide {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;

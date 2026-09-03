@@ -30,22 +30,41 @@ se quitaron a petición expresa.
 ## El carrusel de fotos del hero
 
 El fondo de la primera pantalla es un carrusel automático (cambia cada 5
-segundos, con fundido) con las 10 fotos de actividades del CATIM que ya están
-integradas en `assets/` (`f1.jpg` … `f10.jpg`). El texto vive en una franja
-oscura en la parte inferior de la foto, para no tapar las caras del resto de
-la imagen.
+segundos, con fundido). El texto vive en una franja oscura en la parte
+inferior de la foto, para no tapar las caras del resto de la imagen.
 
-Para reemplazar o agregar fotos más adelante:
+Ahora hay **dos sets de fotos independientes**, uno por tipo de pantalla:
+
+- **Computadora / tablet** (pantallas de más de 700px de ancho): usa
+  `assets/f1.jpg` … `f10.jpg` — fotos horizontales (apaisadas), las mismas
+  de antes.
+- **Celular** (pantallas de hasta 700px de ancho): usa `assets/m1.jpg` …
+  `m10.jpg` — fotos pensadas para pantalla vertical.
+
+El sitio elige el set correcto una sola vez, al cargar la página (no cambia
+si giras el celular después).
+
+### Resolución recomendada para las fotos de celular (`m1.jpg` … `m10.jpg`)
+
+- **1080 × 1920 px** (formato vertical 9:16, el más común en celulares).
+- Formato `.jpg`, apuntando a 150–300 KB por foto ya comprimida (herramientas
+  gratuitas como [Squoosh](https://squoosh.app) o [TinyPNG](https://tinypng.com)
+  hacen esto en segundos).
+- Igual que con las de computadora: pon lo importante (caras, letreros) cerca
+  del centro vertical de la foto, no pegado arriba ni abajo — el sitio recorta
+  más los extremos superior/inferior en pantallas muy altas y angostas.
+- No hace falta subir las 10: si falta alguna, el sitio la salta sin error.
+  Mientras no subas ninguna `m*.jpg`, el celular simplemente no mostrará
+  fondo en el hero (fondo verde sólido) hasta que las agregues.
+
+Para reemplazar o agregar fotos de computadora más adelante, la misma lógica
+de antes sigue aplicando:
 - Usa el mismo nombre de archivo que quieras sustituir (por ejemplo, sube tu
   nueva foto como `f3.jpg` para reemplazar esa posición del carrusel).
-- No hace falta que existan las 10: si falta alguna, el sitio simplemente la
-  salta sin mostrar ningún ícono de imagen rota.
 - Deben ser `.jpg`. Si prefieres usar `.png`, avísame o cambia la extensión
-  en `index.html` (busca `assets/f1.jpg` y las que le siguen).
-- Recomendado: fotos horizontales (apaisadas), idealmente de al menos
-  1600×1000 px, con lo importante (caras, letreros) cerca del centro y no
-  pegado a las orillas — así se ve bien tanto en pantallas anchas como en
-  celular.
+  en `index.html` (busca `assets/f1.jpg`, `assets/m1.jpg` y las que le siguen).
+- Recomendado para computadora: fotos horizontales, idealmente de al menos
+  1600×1000 px.
 
 ## Publicaciones destacadas
 
