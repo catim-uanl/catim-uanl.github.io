@@ -7,15 +7,91 @@ sin dependencias de servidor).
 ## Estructura del proyecto
 
 ```
-index.html      → contenido y estructura de todas las secciones
-styles.css      → estilos (paleta verde institucional / plateado / blanco)
-script.js       → menú móvil, animaciones al hacer scroll, botón "volver arriba"
+index.html            → contenido y estructura de todas las secciones
+styles.css            → estilos (paleta verde institucional / plateado / blanco)
+script.js             → menú móvil, carrusel del hero, publicaciones, formulario de contacto, scroll y botón "volver arriba"
+google-apps-script.gs → código para conectar el formulario con Google Sheets (ver más abajo)
 assets/
-  catim-seal.png    → sello del CATIM (navbar, marca de agua del hero, footer, favicon)
-  uanl-logo.png      → logo de la UANL
-  fime-logo.png      → logo de la FIME
+  catim-seal.png                → sello del CATIM (navbar, footer, favicon)
+  uanl-logo.png, fime-logo.png  → logos institucionales
   juan.png, griselda.png, luis.png, erick.png → fotos del cuerpo académico
+  f1.jpg ... f10.jpg            → fotos del carrusel del hero (ver abajo)
 ```
+
+## Orden de las secciones
+
+Hero → Quiénes somos → Líneas de investigación → Programas educativos →
+Misión y Visión → Cuerpo académico → Publicaciones destacadas →
+Formas de participar → Contacto.
+
+Ya no existe la sección "Noticias y actividades" ni el widget de Facebook —
+se quitaron a petición expresa.
+
+## El carrusel de fotos del hero
+
+El fondo de la primera pantalla es un carrusel automático (cambia cada 5
+segundos, con fundido) con las 10 fotos de actividades del CATIM que ya están
+integradas en `assets/` (`f1.jpg` … `f10.jpg`). El texto vive en una franja
+oscura en la parte inferior de la foto, para no tapar las caras del resto de
+la imagen.
+
+Para reemplazar o agregar fotos más adelante:
+- Usa el mismo nombre de archivo que quieras sustituir (por ejemplo, sube tu
+  nueva foto como `f3.jpg` para reemplazar esa posición del carrusel).
+- No hace falta que existan las 10: si falta alguna, el sitio simplemente la
+  salta sin mostrar ningún ícono de imagen rota.
+- Deben ser `.jpg`. Si prefieres usar `.png`, avísame o cambia la extensión
+  en `index.html` (busca `assets/f1.jpg` y las que le siguen).
+- Recomendado: fotos horizontales (apaisadas), idealmente de al menos
+  1600×1000 px, con lo importante (caras, letreros) cerca del centro y no
+  pegado a las orillas — así se ve bien tanto en pantallas anchas como en
+  celular.
+
+## Publicaciones destacadas
+
+Se muestran las 5 más recientes; el botón "Ver 5 publicaciones más" despliega
+las otras 5 sin necesidad de recargar la página.
+
+**¿Se actualizan solas?** No. Es una selección curada a mano de los perfiles
+de Google Scholar de los 4 integrantes — Google Scholar no ofrece un API
+público gratuito para conectarlo en automático, así que hay que revisarla y
+actualizarla manualmente de vez en cuando (una o dos veces al año es
+razonable).
+
+## El formulario de contacto
+
+El formulario (tema de la consulta, nombre, método de contacto preferido y
+mensaje) puede guardar cada respuesta como una fila en un **Google Sheets**.
+Como el sitio es estático (sin servidor propio), esto se logra con un
+**Google Apps Script** — es gratis y no necesita backend ni tarjeta de
+crédito, pero sí requiere que hagas una configuración de una sola vez en tu
+propia cuenta de Google.
+
+### Cómo activarlo (una sola vez)
+
+1. Crea un Google Sheets nuevo (o usa uno existente para esto).
+2. En el Sheets, ve a **Extensiones → Apps Script**.
+3. Borra lo que haya en "Código.gs" y pega el contenido completo del
+   archivo **`google-apps-script.gs`** que viene junto a este sitio.
+4. Arriba a la derecha: **Implementar → Nueva implementación**.
+5. Tipo: **Aplicación web**. Ejecutar como: **Yo**. Acceso: **Cualquier
+   usuario**.
+6. Dale **Implementar** y acepta los permisos que te pida Google (es tu
+   propio script, es seguro).
+7. Copia la URL que te da (termina en `/exec`).
+8. Abre `script.js`, busca el texto `PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT`
+   y reemplázalo por esa URL completa (entre comillas, tal como está).
+9. Sube el cambio a GitHub. Listo — cada respuesta del formulario ahora cae
+   como fila nueva en tu Google Sheets.
+
+### Mientras no lo actives
+
+Si dejas el texto de ejemplo tal cual (sin pegar tu URL), el formulario
+sigue funcionando igual que antes: las respuestas llegan por correo a
+`angel.rodriguezln@uanl.edu.mx` a través de [FormSubmit](https://formsubmit.co/)
+(la primera vez, FormSubmit manda un correo de confirmación que hay que
+abrir y aceptar una sola vez). En cuanto pegues la URL de tu Apps Script,
+el sitio deja de usar ese respaldo y empieza a guardar todo en tu Sheets.
 
 ## Cómo editar y publicar cambios
 
@@ -32,23 +108,13 @@ Como el sitio ya vive en GitHub Pages, el flujo normal es:
 4. GitHub Pages reconstruye el sitio automáticamente en uno o dos minutos.
 
 No hay paso de "build": lo que subas a la rama publicada es exactamente lo que
-se ve en línea. Si algo no se refleja después de un par de minutos, revisa en
-la pestaña **Actions** del repositorio si el deploy de Pages falló.
-
-## Limitaciones técnicas conocidas
-
-- **Instagram**: no tiene feed en vivo embebido. Instagram no ofrece, como sí
-  lo hace Facebook, un widget público sin necesitar un token del API de Meta.
-  Si más adelante lo quieren, la opción más simple sigue siendo un servicio
-  gratuito como LightWidget o SnapWidget.
-- **Ancho del feed de Facebook**: el widget oficial de Meta ("Page Plugin") no
-  siempre estira su contenido interno al 100% del contenedor aunque el
-  `<iframe>` sea más ancho — es una limitación del propio widget de Facebook,
-  no del sitio.
-- **Publicaciones destacadas**: es una selección curada a mano de los perfiles
-  de Google Scholar de los 4 integrantes, no una lista generada
-  automáticamente — Google Scholar no ofrece un API público gratuito para
-  eso, así que hay que revisarla y actualizarla manualmente de vez en cuando.
+se ve en línea. Si algo no se refleja después de un par de minutos:
+- Revisa la pestaña **Actions** del repositorio, por si el deploy de Pages falló.
+- Fuerza un refresco sin caché en el navegador (Ctrl+Shift+R / Cmd+Shift+R).
+- Los enlaces a `styles.css` y `script.js` en `index.html` llevan un
+  parámetro `?v=5` — si vuelves a editar esos archivos y el cambio no se
+  refleja, sube ese número (`?v=6`, `?v=7`...) para forzar que el navegador
+  descargue la versión nueva en vez de la guardada en caché.
 
 ## Colores de marca
 
@@ -64,5 +130,5 @@ la pestaña **Actions** del repositorio si el deploy de Pages falló.
   fondo degradado — pensado para fotos PNG con transparencia.
 - Animaciones de aparición al hacer scroll en la mayoría de las secciones;
   respetan `prefers-reduced-motion` para quienes prefieren menos movimiento.
-- El ajuste fino de las animaciones vive en `styles.css`, bajo el bloque
-  `/* ---------- scroll reveal ---------- */`.
+  El carrusel del hero también respeta esa preferencia: si el sistema del
+  visitante pide menos movimiento, se queda fijo en la primera foto.

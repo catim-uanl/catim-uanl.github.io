@@ -7,20 +7,23 @@
 <meta name="description" content="CATIM (UANL-CA-272), cuerpo académico consolidado de la Facultad de Ingeniería Mecánica y Eléctrica, UANL. Investigación en sistemas mecatrónicos, robótica móvil y percepción.">
 <meta property="og:title" content="CATIM — Tecnología e Innovación Mecatrónica">
 <meta property="og:description" content="Cuerpo académico consolidado (UANL-CA-272) de la FIME-UANL. Investigación en sistemas mecatrónicos, robótica móvil, percepción y cognición.">
-<meta property="og:image" content="assets/catim-seal.png?v=4">
+<meta property="og:image" content="assets/catim-seal.png?v=6">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#00763D">
-<link rel="icon" type="image/png" href="assets/catim-seal.png?v=4">
+<link rel="icon" type="image/png" href="assets/catim-seal.png?v=6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 
 <header class="topbar">
   <a href="#top" class="brand">
-    <img src="assets/catim-seal.png?v=4" alt="Sello del CATIM" class="brand-seal">
+    <img src="assets/catim-seal.png?v=6" alt="Sello del CATIM" class="brand-seal">
+    <span class="brand-divider" aria-hidden="true"></span>
+    <img src="assets/uanl-logo.png" alt="Universidad Autónoma de Nuevo León" class="brand-logo">
+    <img src="assets/fime-logo.png" alt="Facultad de Ingeniería Mecánica y Eléctrica" class="brand-logo">
   </a>
   <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="topnav" aria-label="Abrir menú">
     <span></span><span></span><span></span>
@@ -28,9 +31,9 @@
   <nav class="topnav" id="topnav">
     <a href="#quienes">Quiénes somos</a>
     <a href="#lineas">Líneas</a>
+    <a href="#programas">Programas</a>
     <a href="#equipo">Equipo</a>
     <a href="#publicaciones">Publicaciones</a>
-    <a href="#noticias">Noticias</a>
     <a href="#participa">Participa</a>
     <a href="#contacto" class="topnav-cta">Contacto</a>
   </nav>
@@ -40,19 +43,26 @@
 
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
-    <img src="assets/catim-seal.png?v=4" alt="" class="hero-watermark" aria-hidden="true">
-    <div class="hero-inner reveal">
-      <p class="hero-eyebrow">Facultad de Ingeniería Mecánica y Eléctrica<br>Universidad Autónoma de Nuevo León</p>
+    <div class="hero-carousel" aria-hidden="true">
+      <img src="assets/f1.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f2.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f3.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f4.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f5.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f6.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f7.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f8.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f9.jpg" class="hero-slide" onerror="this.remove()">
+      <img src="assets/f10.jpg" class="hero-slide" onerror="this.remove()">
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-bottom reveal">
       <h1 id="hero-title">Cuerpo Académico Tecnología e Innovación Mecatrónica</h1>
-      <p class="hero-badge">Cuerpo académico consolidado · Registro UANL-CA-272 · PRODEP-SEP</p>
       <div class="hero-actions">
         <a href="#quienes" class="btn btn-primary">Conócenos</a>
         <a href="#participa" class="btn btn-ghost">Formas de participar</a>
       </div>
-    </div>
-    <div class="hero-logos reveal">
-      <img src="assets/uanl-logo.png" alt="Universidad Autónoma de Nuevo León" class="hero-logo hero-logo--wide">
-      <img src="assets/fime-logo.png" alt="Facultad de Ingeniería Mecánica y Eléctrica" class="hero-logo hero-logo--wide">
+      <div class="hero-dots" id="heroDots" aria-hidden="true"></div>
     </div>
     <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
       <path d="M0,32 C240,80 480,0 720,24 C960,48 1200,72 1440,24 L1440,80 L0,80 Z" fill="var(--blanco)"></path>
@@ -64,34 +74,55 @@
     <div class="section-head reveal">
       <h2 id="quienes-title">Quiénes somos</h2>
     </div>
-    <div class="two-col">
-      <div class="two-col-body reveal">
-        <p>El CATIM es un cuerpo académico adscrito a la FIME, con número de registro <strong>UANL-CA-272</strong>, reconocido por el Programa para el Desarrollo Profesional Docente (PRODEP) de la SEP con nivel <strong>Consolidado</strong>.</p>
-        <p>Está formado por profesores-investigadores con reconocimiento nacional, que cuentan con productos de investigación de calidad, amplia experiencia en docencia y en formación de recursos humanos, y un alto compromiso con la institución. Colaboramos entre nosotros, con nuestros estudiantes y con otros investigadores.</p>
-      </div>
-      <div class="two-col-aside reveal">
-        <h3 class="aside-title">Programas educativos en los que participamos</h3>
-        <div class="program-groups">
-          <div class="program-group">
-            <h4>Posgrado</h4>
-            <ul class="program-list">
-              <li><a href="https://posgrado.uanl.mx/ofertas_educativas/doctorado-en-ingenieria-electrica/" target="_blank" rel="noopener">Doctorado en Ingeniería Eléctrica</a></li>
-              <li><a href="https://posgrado.uanl.mx/ofertas_educativas/maestria-en-ciencias-de-la-ingenieria-electrica/" target="_blank" rel="noopener">Maestría en Ciencias de la Ingeniería Eléctrica</a></li>
-              <li><a href="https://posgrado.uanl.mx/ofertas_educativas/doctorado-en-inteligencia-artificial-y-optimizacion/" target="_blank" rel="noopener">Doctorado en Inteligencia Artificial y Optimización</a></li>
-              <li><a href="https://posgrado.uanl.mx/ofertas_educativas/maestria-en-ciencias-en-inteligencia-artificial-y-optimizacion/" target="_blank" rel="noopener">Maestría en Ciencias en Inteligencia Artificial y Optimización</a></li>
-            </ul>
-          </div>
-          <div class="program-group">
-            <h4>Licenciatura</h4>
-            <ul class="program-list">
-              <li><a href="https://www.uanl.mx/oferta/ingeniero-en-mecatronica/" target="_blank" rel="noopener">Ingeniería Mecatrónica</a></li>
-              <li><a href="https://www.uanl.mx/oferta/ingenieria-en-inteligencia-artificial/" target="_blank" rel="noopener">Ingeniería en Inteligencia Artificial</a></li>
-              <li><a href="https://www.uanl.mx/oferta/ingenieria-en-automatizacion-y-sistemas-inteligentes/" target="_blank" rel="noopener">Ingeniería en Automatización y Sistemas Inteligentes</a></li>
-              <li><a href="https://www.uanl.mx/oferta/ingeniero-biomedico/" target="_blank" rel="noopener">Ingeniería Biomédica</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <div class="prose-block reveal">
+      <p>El CATIM es un cuerpo académico adscrito a la FIME, con número de registro <strong>UANL-CA-272</strong>, reconocido por el Programa para el Desarrollo Profesional Docente (PRODEP) de la SEP con nivel <strong>Consolidado</strong>.</p>
+      <p>Está formado por profesores-investigadores con reconocimiento nacional, que cuentan con productos de investigación de calidad, amplia experiencia en docencia y en formación de recursos humanos, y un alto compromiso con la institución. Colaboramos entre nosotros, con nuestros estudiantes y con otros investigadores.</p>
+      <p>Cultivamos 2 líneas de investigación y participamos en 8 programas educativos, de licenciatura a doctorado.</p>
+    </div>
+  </section>
+
+  <!-- LINEAS DE INVESTIGACION -->
+  <section class="section section--tint" id="lineas" aria-labelledby="lineas-title">
+    <div class="section-head reveal">
+      <h2 id="lineas-title">Líneas de investigación</h2>
+      <p class="section-lede">Las líneas de investigación se asocian a proyectos, actividades o estudios que profundizan en el conocimiento, con objetivos y metas de carácter académico, orientados a aplicaciones innovadoras en beneficio de la sociedad. Uno de los principales objetivos del CATIM es realizar investigación científica en áreas afines a la mecatrónica.</p>
+    </div>
+    <div class="line-grid">
+      <article class="line-card reveal">
+        <h3>Análisis, control y diseño de sistemas mecatrónicos</h3>
+        <p>Por ejemplo: sistemas biomecatrónicos para restaurar funciones neuromotrices, análisis y control de sistemas de alta dimensión o de dinámica no lineal altamente compleja, análisis de biomecánica articular, diseño e implementación de dispositivos de asistencia, diseño de esquemas de control de mecanismos articulados, instrumentación, procesamiento de señales electrofisiológicas y diseño de interfaces cerebro-computadora, entre otros.</p>
+      </article>
+      <article class="line-card reveal">
+        <h3>Robótica móvil, percepción y cognición</h3>
+        <p>Por ejemplo: autonomía, navegación y toma de decisiones en vehículos autónomos, enjambres de robots, algoritmos bioinspirados, análisis y control de robots, visión por computadora, inteligencia artificial aplicada a la toma de decisiones en robótica y sistemas autónomos, entre otros.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROGRAMAS EDUCATIVOS -->
+  <section class="section section--white" id="programas" aria-labelledby="programas-title">
+    <div class="section-head reveal">
+      <h2 id="programas-title">Programas educativos en los que participamos</h2>
+    </div>
+    <div class="program-cards">
+      <article class="program-card reveal">
+        <h3>Posgrado</h3>
+        <ul class="program-list">
+          <li><a href="https://posgrado.uanl.mx/ofertas_educativas/doctorado-en-ingenieria-electrica/" target="_blank" rel="noopener">Doctorado en Ingeniería Eléctrica</a></li>
+          <li><a href="https://posgrado.uanl.mx/ofertas_educativas/maestria-en-ciencias-de-la-ingenieria-electrica/" target="_blank" rel="noopener">Maestría en Ciencias de la Ingeniería Eléctrica</a></li>
+          <li><a href="https://posgrado.uanl.mx/ofertas_educativas/doctorado-en-inteligencia-artificial-y-optimizacion/" target="_blank" rel="noopener">Doctorado en Inteligencia Artificial y Optimización</a></li>
+          <li><a href="https://posgrado.uanl.mx/ofertas_educativas/maestria-en-ciencias-en-inteligencia-artificial-y-optimizacion/" target="_blank" rel="noopener">Maestría en Ciencias en Inteligencia Artificial y Optimización</a></li>
+        </ul>
+      </article>
+      <article class="program-card reveal">
+        <h3>Licenciatura</h3>
+        <ul class="program-list">
+          <li><a href="https://www.uanl.mx/oferta/ingeniero-en-mecatronica/" target="_blank" rel="noopener">Ingeniería Mecatrónica</a></li>
+          <li><a href="https://www.uanl.mx/oferta/ingenieria-en-inteligencia-artificial/" target="_blank" rel="noopener">Ingeniería en Inteligencia Artificial</a></li>
+          <li><a href="https://www.uanl.mx/oferta/ingenieria-en-automatizacion-y-sistemas-inteligentes/" target="_blank" rel="noopener">Ingeniería en Automatización y Sistemas Inteligentes</a></li>
+          <li><a href="https://www.uanl.mx/oferta/ingeniero-biomedico/" target="_blank" rel="noopener">Ingeniería Biomédica</a></li>
+        </ul>
+      </article>
     </div>
   </section>
 
@@ -109,26 +140,8 @@
       </article>
     </div>
     <svg class="section-wave section-wave--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,20 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="var(--blanco)"></path>
+      <path d="M0,20 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="var(--plata-clara)"></path>
     </svg>
-  </section>
-
-  <!-- LINEAS DE INVESTIGACION -->
-  <section class="section section--white" id="lineas" aria-labelledby="lineas-title">
-    <div class="section-head reveal">
-      <h2 id="lineas-title">Líneas de investigación</h2>
-      <p class="section-lede">Las líneas de investigación se asocian a proyectos, actividades o estudios que profundizan en el conocimiento, con objetivos y metas de carácter académico, orientados a aplicaciones innovadoras en beneficio de la sociedad. Uno de los principales objetivos del CATIM es realizar investigación científica en áreas afines a la mecatrónica.</p>
-    </div>
-    <div class="line-grid">
-      <article class="line-card reveal">
-        <h3>Análisis, control y diseño de sistemas mecatrónicos</h3>
-        <p>Por ejemplo: sistemas biomecatrónicos para restaurar funciones neuromotrices, análisis y control de sistemas de alta dimensión o de dinámica no lineal altamente compleja, análisis de biomecánica articular, diseño e implementación de dispositivos de asistencia, diseño de esquemas de control de mecanismos articulados, instrumentación, procesamiento de señales electrofisiológicas y diseño de interfaces cerebro-computadora, entre otros.</p>
-      </article>
-      <article class="line-card reveal">
-        <h3>Robótica móvil, percepción y cognición</h3>
-        <p>Por ejemplo: autonomía, navegación y toma de decisiones en vehículos autónomos, enjambres de robots, algoritmos bioinspirados, análisis y control de robots, visión por computadora, inteligencia artificial aplicada a la toma de decisiones en robótica y sistemas autónomos, entre otros.</p>
-      </article>
-    </div>
   </section>
 
   <!-- EQUIPO -->
@@ -255,6 +268,8 @@
         </div>
         <a class="pub-link" href="https://doi.org/10.1016/j.bbe.2024.01.003" target="_blank" rel="noopener">DOI ↗</a>
       </li>
+    </ol>
+    <ol class="pub-list pub-list--more" id="pubMore">
       <li>
         <span class="pub-year">2024</span>
         <div class="pub-body">
@@ -296,27 +311,13 @@
         <a class="pub-link" href="https://doi.org/10.1007/s10846-018-0941-2" target="_blank" rel="noopener">DOI ↗</a>
       </li>
     </ol>
-  </section>
-
-  <!-- NOTICIAS -->
-  <section class="section section--tint" id="noticias" aria-labelledby="noticias-title">
-    <div class="section-head reveal">
-      <h2 id="noticias-title">Noticias y actividades</h2>
-    </div>
-    <div class="social-single reveal">
-      <div class="social-embed">
-        <iframe
-          src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fcatim.uanl&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
-          width="100%" height="600" style="border:none;overflow:hidden;max-width:500px;display:block;margin:0 auto" scrolling="no" frameborder="0"
-          allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          title="Feed de Facebook de CATIM"></iframe>
-        <a class="social-embed-more" href="https://www.facebook.com/catim.uanl" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:0.9rem;font-family:'Inter',sans-serif;font-weight:600;font-size:0.9rem;color:#00763D;text-decoration:none;">Ver página completa en Facebook ↗</a>
-      </div>
+    <div class="pub-toggle-wrap">
+      <button type="button" class="pub-toggle" id="pubToggle" aria-expanded="false" aria-controls="pubMore">Ver 5 publicaciones más</button>
     </div>
   </section>
 
   <!-- PARTICIPA -->
-  <section class="section section--white" id="participa" aria-labelledby="participa-title">
+  <section class="section section--tint" id="participa" aria-labelledby="participa-title">
     <div class="section-head reveal">
       <h2 id="participa-title">Formas de participar</h2>
     </div>
@@ -351,17 +352,94 @@
   <!-- CONTACTO -->
   <section class="section section--green" id="contacto" aria-labelledby="contacto-title">
     <div class="contact-grid reveal">
-      <div>
+      <div class="contact-card contact-form-card">
         <h2 id="contacto-title">Contacto</h2>
-        <p>¿Te interesa colaborar, realizar una estancia o conocer más sobre nuestras líneas de investigación? Escríbenos.</p>
-        <a class="btn btn-light" href="mailto:angel.rodriguezln@uanl.edu.mx">Escribir por correo</a>
+        <p>¿Te interesa colaborar, realizar una estancia o conocer más sobre nuestras líneas de investigación? Cuéntanos.</p>
+
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/angel.rodriguezln@uanl.edu.mx" method="POST">
+          <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio del CATIM">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+          <fieldset class="form-field">
+            <legend>¿Tu consulta es sobre...?</legend>
+            <div class="form-radio-group">
+              <label><input type="radio" name="Tema" value="Licenciatura" required> Licenciatura</label>
+              <label><input type="radio" name="Tema" value="Posgrado"> Posgrado</label>
+              <label><input type="radio" name="Tema" value="Institución"> Institución</label>
+              <label><input type="radio" name="Tema" value="Empresa"> Empresa</label>
+            </div>
+          </fieldset>
+
+          <div class="form-field">
+            <label for="cf-nombre">Nombre</label>
+            <input type="text" id="cf-nombre" name="Nombre" required>
+          </div>
+
+          <fieldset class="form-field">
+            <legend>¿Cómo prefieres que te contactemos?</legend>
+            <div class="form-radio-group">
+              <label><input type="radio" name="Método de contacto" value="Correo electrónico" id="cf-metodo-correo" checked> Correo electrónico</label>
+              <label><input type="radio" name="Método de contacto" value="WhatsApp" id="cf-metodo-whatsapp"> WhatsApp</label>
+            </div>
+          </fieldset>
+
+          <div class="form-field" id="cf-campo-correo">
+            <label for="cf-correo">Correo electrónico</label>
+            <input type="email" id="cf-correo" name="Correo">
+          </div>
+          <div class="form-field" id="cf-campo-whatsapp" hidden>
+            <label for="cf-whatsapp">Número de WhatsApp</label>
+            <input type="tel" id="cf-whatsapp" name="WhatsApp" placeholder="10 dígitos">
+          </div>
+
+          <div class="form-field">
+            <label for="cf-mensaje">¿Qué buscas o cuál es tu duda?</label>
+            <textarea id="cf-mensaje" name="Mensaje" rows="4" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="contactFormSubmit">Enviar</button>
+          <p class="form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
+        </form>
       </div>
-      <div class="contact-social">
-        <p class="contact-social-label">Síguenos</p>
-        <a href="https://www.instagram.com/catim.uanl/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.facebook.com/catim.uanl" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.youtube.com/@catimuanl" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.whatsapp.com/channel/0029VbAknRyIiRoku8P7SU2E" target="_blank" rel="noopener">Canal de WhatsApp</a>
+
+      <div class="contact-card contact-social-card">
+        <h3 class="contact-social-label">Síguenos</h3>
+        <ul class="social-links">
+          <li>
+            <a href="https://www.instagram.com/catim.uanl/" target="_blank" rel="noopener">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+              </span>
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/catim.uanl" target="_blank" rel="noopener">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M14.5 21v-7.5h2.5l.4-3H14.5V8.5c0-.87.24-1.46 1.49-1.46H17.5V4.36C17.2 4.32 16.2 4.24 15 4.24c-2.4 0-4.05 1.47-4.05 4.16V10.5H8.5v3H11V21h3.5z" fill="currentColor"/></svg>
+              </span>
+              Facebook
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@catimuanl" target="_blank" rel="noopener">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="6" width="19" height="12" rx="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 9.7v4.6l4-2.3-4-2.3z" fill="currentColor"/></svg>
+              </span>
+              YouTube
+            </a>
+          </li>
+          <li>
+            <a href="https://www.whatsapp.com/channel/0029VbAknRyIiRoku8P7SU2E" target="_blank" rel="noopener">
+              <span class="social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5a8.4 8.4 0 0 0-7.2 12.7L3.5 20.5l4.4-1.3A8.4 8.4 0 1 0 12 3.5Z" stroke="currentColor" stroke-width="1.7"/><path d="M8.7 8.4c.2-.5.5-.5.7-.5h.5c.2 0 .4 0 .6.4.2.5.6 1.5.6 1.6.1.1.1.3 0 .4-.1.2-.1.3-.3.5s-.3.3-.1.6c.2.4.9 1.4 1.9 2.2 1.3 1 1.9 1.2 2.2 1 .2-.1.4-.4.6-.6.2-.2.3-.2.5-.1l1.5.7c.2.1.3.2.4.3.1.2.1.9-.2 1.4-.3.5-1.4 1.1-2 1.1-.6 0-1.6-.1-3.5-1.1-2.4-1.3-3.9-3.7-4-3.9-.1-.2-.9-1.3-.9-2.5s.6-1.8.8-2z" fill="currentColor"/></svg>
+              </span>
+              Canal de WhatsApp
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -380,6 +458,6 @@
   <p>Cuerpo Académico Tecnología e Innovación Mecatrónica (UANL-CA-272) · Facultad de Ingeniería Mecánica y Eléctrica · Universidad Autónoma de Nuevo León</p>
 </footer>
 
-<script src="script.js?v=4"></script>
+<script src="script.js?v=6"></script>
 </body>
 </html>
