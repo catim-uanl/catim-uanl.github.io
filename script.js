@@ -141,11 +141,11 @@
 /* Publicaciones destacadas: botón para mostrar/ocultar las siguientes. */
 (function () {
   const toggle = document.getElementById("pubToggle");
-  const more = document.getElementById("pubMore");
-  if (!toggle || !more) return;
+  const wrap = document.getElementById("pubMoreWrap");
+  if (!toggle || !wrap) return;
 
   toggle.addEventListener("click", () => {
-    const isOpen = more.classList.toggle("is-open");
+    const isOpen = wrap.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(isOpen));
     toggle.textContent = isOpen
       ? "Ver menos publicaciones"
@@ -199,6 +199,9 @@
   if (!endpointConfigurado) return; // usa el respaldo por correo (FormSubmit)
 
   let yaSeMostroConfirmacion = false;
+  const prefiereMenosMovimiento = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   function mostrarConfirmacion() {
     // Puede llamarse dos veces (cuando el fetch resuelve y, si tarda
@@ -206,8 +209,21 @@
     // Solo debe actuar una vez.
     if (yaSeMostroConfirmacion) return;
     yaSeMostroConfirmacion = true;
-    form.hidden = true;
-    confirmacion.hidden = false;
+
+    if (prefiereMenosMovimiento) {
+      form.hidden = true;
+      confirmacion.hidden = false;
+      return;
+    }
+
+    // Se desvanece el formulario (200ms, ver .form-fading en styles.css)
+    // y, al terminar, se intercambia por la confirmación, que entra con
+    // su propia animación (@keyframes confirmIn).
+    form.classList.add("form-fading");
+    window.setTimeout(() => {
+      form.hidden = true;
+      confirmacion.hidden = false;
+    }, 200);
   }
 
   form.addEventListener("submit", function (event) {
@@ -237,5 +253,184 @@
       .catch(mostrarConfirmacion);
 
     setTimeout(mostrarConfirmacion, 3000);
+  });
+})();
+
+/* Enjambre del hero: una simulación mínima de repulsión-atracción-influencia
+   (el mismo principio detrás de la línea de investigación en robótica de
+   enjambres del CATIM) dibujada en un <canvas>, como firma visual del sitio.
+   No decorativa al azar: son agentes reales con reglas reales, muy suaves,
+   detrás de las fotos del carrusel. Se detiene por completo si el sistema
+   pide menos movimiento, o si la pestaña no está visible. */
+(function () {
+  const canvas = document.getElementById("heroSwarm");
+  const hero = document.querySelector(".hero");
+  if (!canvas || !hero) return;
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  if (prefersReducedMotion) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const AGENT_COUNT = 34;
+  const NEIGHBOR_RADIUS = 90;
+  const REPEL_RADIUS = 34;
+  const MAX_SPEED = 0.35;
+  const LINK_OPACITY = 0.09;
+
+  let width = 0;
+  let height = 0;
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let agents = [];
+  let frameId = null;
+  let running = false;
+
+  function resize() {
+    const rect = hero.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function makeAgents() {
+    agents = Array.from({ length: AGENT_COUNT }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * MAX_SPEED,
+      vy: (Math.random() - 0.5) * MAX_SPEED,
+    }));
+  }
+
+  function step() {
+    for (let i = 0; i < agents.length; i++) {
+      const a = agents[i];
+      let repelX = 0, repelY = 0;
+      let alignX = 0, alignY = 0;
+      let cohereX = 0, cohereY = 0;
+      let neighbors = 0;
+
+      for (let j = 0; j < agents.length; j++) {
+        if (i === j) continue;
+        const b = agents[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+
+        if (dist < REPEL_RADIUS) {
+          // repulsión: no chocar con el vecino
+          repelX += dx / dist;
+          repelY += dy / dist;
+        }
+        if (dist < NEIGHBOR_RADIUS) {
+          // influencia: alinear rumbo con vecinos cercanos
+          alignX += b.vx;
+          alignY += b.vy;
+          // atracción: no dispersarse del grupo
+          cohereX += b.x;
+          cohereY += b.y;
+          neighbors++;
+        }
+      }
+
+      if (neighbors > 0) {
+        alignX /= neighbors;
+        alignY /= neighbors;
+        cohereX = cohereX / neighbors - a.x;
+        cohereY = cohereY / neighbors - a.y;
+      }
+
+      a.vx += repelX * 0.02 + alignX * 0.02 + cohereX * 0.0006;
+      a.vy += repelY * 0.02 + alignY * 0.02 + cohereY * 0.0006;
+
+      const speed = Math.sqrt(a.vx * a.vx + a.vy * a.vy) || 0.001;
+      if (speed > MAX_SPEED) {
+        a.vx = (a.vx / speed) * MAX_SPEED;
+        a.vy = (a.vy / speed) * MAX_SPEED;
+      }
+
+      a.x += a.vx;
+      a.y += a.vy;
+
+      // bordes suaves: reaparece del otro lado en vez de rebotar
+      if (a.x < -10) a.x = width + 10;
+      if (a.x > width + 10) a.x = -10;
+      if (a.y < -10) a.y = height + 10;
+      if (a.y > height + 10) a.y = -10;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    ctx.strokeStyle = "rgba(239, 240, 236, " + LINK_OPACITY + ")";
+    ctx.lineWidth = 1;
+    for (let i = 0; i < agents.length; i++) {
+      for (let j = i + 1; j < agents.length; j++) {
+        const a = agents[i];
+        const b = agents[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < NEIGHBOR_RADIUS) {
+          ctx.globalAlpha = 1 - dist / NEIGHBOR_RADIUS;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = "rgba(239, 240, 236, 0.55)";
+    for (const a of agents) {
+      ctx.beginPath();
+      ctx.arc(a.x, a.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function loop() {
+    if (!running) return;
+    step();
+    draw();
+    frameId = requestAnimationFrame(loop);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    frameId = requestAnimationFrame(loop);
+  }
+
+  function stop() {
+    running = false;
+    if (frameId) cancelAnimationFrame(frameId);
+    frameId = null;
+  }
+
+  resize();
+  makeAgents();
+  start();
+
+  let resizeTimer = null;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resize();
+      makeAgents();
+    }, 200);
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else start();
   });
 })();
