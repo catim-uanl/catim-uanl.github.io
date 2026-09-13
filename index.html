@@ -13,10 +13,12 @@
 <link rel="icon" type="image/png" href="assets/catim-seal.png?v=7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=14">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=27">
 </head>
 <body>
+
+<a href="#top" class="skip-link">Saltar al contenido principal</a>
 
 <header class="topbar">
   <a href="#top" class="brand">
@@ -24,7 +26,7 @@
     <span class="brand-divider" aria-hidden="true"></span>
     <span class="brand-logos">
       <img src="assets/uanl-logo.png" alt="Universidad Autónoma de Nuevo León" class="brand-logo">
-      <img src="assets/fime-logo.png" alt="Facultad de Ingeniería Mecánica y Eléctrica" class="brand-logo">
+      <img src="assets/fime-logo.png" alt="Facultad de Ingeniería Mecánica y Eléctrica" class="brand-logo brand-logo--fime">
     </span>
   </a>
   <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="topnav" aria-label="Abrir menú">
@@ -48,28 +50,28 @@
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-carousel hero-carousel--desktop" aria-hidden="true">
-      <img src="assets/f1.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f2.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f3.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f4.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f5.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f6.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f7.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f8.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f9.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/f10.jpg" class="hero-slide" onerror="this.remove()">
+      <img data-src="assets/f1.jpg" class="hero-slide">
+      <img data-src="assets/f2.jpg" class="hero-slide">
+      <img data-src="assets/f3.jpg" class="hero-slide">
+      <img data-src="assets/f4.jpg" class="hero-slide">
+      <img data-src="assets/f5.jpg" class="hero-slide">
+      <img data-src="assets/f6.jpg" class="hero-slide">
+      <img data-src="assets/f7.jpg" class="hero-slide">
+      <img data-src="assets/f8.jpg" class="hero-slide">
+      <img data-src="assets/f9.jpg" class="hero-slide">
+      <img data-src="assets/f10.jpg" class="hero-slide">
     </div>
     <div class="hero-carousel hero-carousel--mobile" aria-hidden="true">
-      <img src="assets/m1.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m2.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m3.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m4.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m5.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m6.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m7.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m8.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m9.jpg" class="hero-slide" onerror="this.remove()">
-      <img src="assets/m10.jpg" class="hero-slide" onerror="this.remove()">
+      <img data-src="assets/m1.jpg" class="hero-slide">
+      <img data-src="assets/m2.jpg" class="hero-slide">
+      <img data-src="assets/m3.jpg" class="hero-slide">
+      <img data-src="assets/m4.jpg" class="hero-slide">
+      <img data-src="assets/m5.jpg" class="hero-slide">
+      <img data-src="assets/m6.jpg" class="hero-slide">
+      <img data-src="assets/m7.jpg" class="hero-slide">
+      <img data-src="assets/m8.jpg" class="hero-slide">
+      <img data-src="assets/m9.jpg" class="hero-slide">
+      <img data-src="assets/m10.jpg" class="hero-slide">
     </div>
     <canvas class="hero-swarm" id="heroSwarm" aria-hidden="true"></canvas>
     <div class="hero-overlay" aria-hidden="true"></div>
@@ -385,46 +387,48 @@
         <h2 id="contacto-title">Contacto</h2>
         <p>¿Te interesa colaborar, realizar una estancia o conocer más sobre nuestras líneas de investigación? Cuéntanos.</p>
 
-        <form class="contact-form" id="contactForm" action="https://formsubmit.co/angel.rodriguezln@uanl.edu.mx" method="POST">
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/angel.rodriguezln@uanl.edu.mx" method="POST" novalidate>
           <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio del CATIM">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
-          <fieldset class="form-field">
-            <legend>¿Tu consulta es sobre...?</legend>
+          <p class="form-required-note">Los campos con * son obligatorios.</p>
+
+          <fieldset class="form-field" id="cf-grupo-tema">
+            <legend>¿Tu consulta es sobre...? <span aria-hidden="true">*</span></legend>
             <div class="form-radio-group">
-              <label><input type="radio" name="Tema" value="Licenciatura" required> Licenciatura</label>
-              <label><input type="radio" name="Tema" value="Posgrado"> Posgrado</label>
-              <label><input type="radio" name="Tema" value="Institución"> Institución</label>
-              <label><input type="radio" name="Tema" value="Empresa"> Empresa</label>
+              <label class="choice-chip"><input type="radio" name="Tema" value="Licenciatura" required><svg class="choice-chip-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Licenciatura</span></label>
+              <label class="choice-chip"><input type="radio" name="Tema" value="Posgrado"><svg class="choice-chip-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Posgrado</span></label>
+              <label class="choice-chip"><input type="radio" name="Tema" value="Institución"><svg class="choice-chip-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Institución</span></label>
+              <label class="choice-chip"><input type="radio" name="Tema" value="Empresa"><svg class="choice-chip-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Empresa</span></label>
             </div>
           </fieldset>
 
-          <div class="form-field">
-            <label for="cf-nombre">Nombre</label>
-            <input type="text" id="cf-nombre" name="Nombre" required>
+          <div class="form-field" id="cf-campo-nombre">
+            <label for="cf-nombre">Nombre <span aria-hidden="true">*</span></label>
+            <input type="text" id="cf-nombre" name="Nombre" autocomplete="name" required>
           </div>
 
-          <fieldset class="form-field">
+          <fieldset class="form-field" id="cf-grupo-metodo">
             <legend>¿Cómo prefieres que te contactemos?</legend>
             <div class="form-radio-group">
-              <label><input type="radio" name="Método de contacto" value="Correo electrónico" id="cf-metodo-correo" checked> Correo electrónico</label>
-              <label><input type="radio" name="Método de contacto" value="WhatsApp" id="cf-metodo-whatsapp"> WhatsApp</label>
+              <label class="choice-chip"><input type="radio" name="Método de contacto" value="Correo electrónico" id="cf-metodo-correo" checked><svg class="choice-chip-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Correo electrónico</span></label>
+              <label class="choice-chip"><input type="radio" name="Método de contacto" value="WhatsApp" id="cf-metodo-whatsapp"><svg class="choice-chip-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>WhatsApp</span></label>
             </div>
           </fieldset>
 
           <div class="form-field" id="cf-campo-correo">
-            <label for="cf-correo">Correo electrónico</label>
-            <input type="email" id="cf-correo" name="Correo">
+            <label for="cf-correo">Correo electrónico <span aria-hidden="true">*</span></label>
+            <input type="email" id="cf-correo" name="Correo" autocomplete="email">
           </div>
           <div class="form-field" id="cf-campo-whatsapp" hidden>
-            <label for="cf-whatsapp">Número de WhatsApp</label>
-            <input type="tel" id="cf-whatsapp" name="WhatsApp" placeholder="10 dígitos">
+            <label for="cf-whatsapp">Número de WhatsApp <span aria-hidden="true">*</span></label>
+            <input type="tel" id="cf-whatsapp" name="WhatsApp" placeholder="10 dígitos" inputmode="numeric" autocomplete="tel">
           </div>
 
-          <div class="form-field">
-            <label for="cf-mensaje">¿Qué buscas o cuál es tu duda?</label>
+          <div class="form-field" id="cf-campo-mensaje">
+            <label for="cf-mensaje">¿Qué buscas o cuál es tu duda? <span aria-hidden="true">*</span></label>
             <textarea id="cf-mensaje" name="Mensaje" rows="4" required></textarea>
           </div>
 
@@ -494,11 +498,11 @@
   <div class="footer-marks">
     <img src="assets/catim-seal.png?v=7" alt="CATIM" class="footer-seal">
     <img src="assets/uanl-logo.png" alt="UANL" class="footer-logo">
-    <img src="assets/fime-logo.png" alt="FIME" class="footer-logo">
+    <img src="assets/fime-logo.png" alt="FIME" class="footer-logo footer-logo--fime">
   </div>
   <p>Cuerpo Académico Tecnología e Innovación Mecatrónica (UANL-CA-272) · Facultad de Ingeniería Mecánica y Eléctrica · Universidad Autónoma de Nuevo León</p>
 </footer>
 
-<script src="script.js?v=10"></script>
+<script src="script.js?v=12"></script>
 </body>
 </html>

@@ -133,9 +133,26 @@
     }
   }
 
-  // Da un pequeño margen para que las imágenes rotas (onerror) ya se hayan
-  // quitado del DOM antes de armar el carrusel y los puntos.
-  window.addEventListener("load", () => setTimeout(start, 50));
+  // Solo se descarga el set de fotos del dispositivo actual (desktop O
+  // celular, nunca los dos): las <img> nacen sin "src" (solo "data-src")
+  // y aquí se activa nada más el set que realmente se va a mostrar.
+  const pending = Array.from(carousel.querySelectorAll(".hero-slide")).map(
+    (img) =>
+      new Promise((resolve) => {
+        img.addEventListener("load", () => resolve(), { once: true });
+        img.addEventListener(
+          "error",
+          () => {
+            img.remove();
+            resolve();
+          },
+          { once: true }
+        );
+        img.src = img.dataset.src;
+      })
+  );
+
+  Promise.all(pending).then(start);
 })();
 
 /* Publicaciones destacadas: botón para mostrar/ocultar las siguientes. */
@@ -179,6 +196,117 @@
   actualizar();
 })();
 
+/* Validación del formulario de contacto: en vez de solo el globo nativo
+   del navegador, muestra un mensaje concreto junto a cada campo, mueve el
+   foco al primer error y lo limpia en cuanto la persona lo corrige. Corre
+   antes que el envío a Google Sheets/FormSubmit y lo bloquea si algo
+   falta. */
+(function () {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+
+  function envoltura(campo) {
+    return campo.closest(".form-field") || campo.closest("fieldset");
+  }
+
+  function mostrarError(campo, mensaje) {
+    const wrap = envoltura(campo);
+    if (!wrap) return;
+    wrap.classList.add("has-error");
+    let error = wrap.querySelector(".field-error");
+    if (!error) {
+      error = document.createElement("p");
+      error.className = "field-error";
+      error.setAttribute("role", "alert");
+      wrap.appendChild(error);
+    }
+    if (!error.id) error.id = "err-" + Math.random().toString(36).slice(2, 9);
+    error.textContent = mensaje;
+    if (campo.tagName !== "FIELDSET") {
+      campo.setAttribute("aria-invalid", "true");
+      campo.setAttribute("aria-describedby", error.id);
+    }
+  }
+
+  function limpiarError(campo) {
+    const wrap = envoltura(campo);
+    if (!wrap) return;
+    wrap.classList.remove("has-error");
+    const error = wrap.querySelector(".field-error");
+    if (error) error.remove();
+    campo.removeAttribute("aria-invalid");
+    campo.removeAttribute("aria-describedby");
+  }
+
+  function validar() {
+    let primerCampoConError = null;
+
+    const grupoTema = document.getElementById("cf-grupo-tema");
+    if (form.querySelector('input[name="Tema"]:checked')) {
+      limpiarError(grupoTema);
+    } else {
+      mostrarError(grupoTema, "Elige una opción.");
+      primerCampoConError =
+        primerCampoConError || form.querySelector('input[name="Tema"]');
+    }
+
+    const nombre = document.getElementById("cf-nombre");
+    if (nombre.value.trim()) {
+      limpiarError(nombre);
+    } else {
+      mostrarError(nombre, "Escribe tu nombre.");
+      primerCampoConError = primerCampoConError || nombre;
+    }
+
+    const correo = document.getElementById("cf-correo");
+    const whatsapp = document.getElementById("cf-whatsapp");
+    if (document.getElementById("cf-metodo-correo").checked) {
+      limpiarError(whatsapp);
+      if (correo.value.trim() && correo.checkValidity()) {
+        limpiarError(correo);
+      } else {
+        mostrarError(correo, "Escribe un correo electrónico válido.");
+        primerCampoConError = primerCampoConError || correo;
+      }
+    } else {
+      limpiarError(correo);
+      if (whatsapp.value.replace(/\D/g, "").length === 10) {
+        limpiarError(whatsapp);
+      } else {
+        mostrarError(whatsapp, "Escribe un número a 10 dígitos.");
+        primerCampoConError = primerCampoConError || whatsapp;
+      }
+    }
+
+    const mensaje = document.getElementById("cf-mensaje");
+    if (mensaje.value.trim()) {
+      limpiarError(mensaje);
+    } else {
+      mostrarError(mensaje, "Cuéntanos qué necesitas.");
+      primerCampoConError = primerCampoConError || mensaje;
+    }
+
+    return primerCampoConError;
+  }
+
+  form.addEventListener("submit", function (event) {
+    const primerCampoConError = validar();
+    if (primerCampoConError) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      primerCampoConError.focus();
+    }
+  });
+
+  form.querySelectorAll("input, textarea").forEach((campo) => {
+    const evento = campo.type === "radio" ? "change" : "input";
+    campo.addEventListener(evento, () => {
+      const wrap = envoltura(campo);
+      if (wrap && wrap.classList.contains("has-error")) validar();
+    });
+  });
+})();
+
 /* Envío del formulario a Google Sheets a través de un Google Apps Script
    publicado como "aplicación web". Mientras GOOGLE_SHEETS_ENDPOINT tenga el
    valor de ejemplo, el formulario usa el envío normal (por correo, vía
@@ -198,7 +326,8 @@
     GOOGLE_SHEETS_ENDPOINT.startsWith("https://script.google.com/");
   if (!endpointConfigurado) return; // usa el respaldo por correo (FormSubmit)
 
-  let yaSeMostroConfirmacion = false;
+  let yaSeResolvio = false;
+  let esperaDeRespaldo = null;
   const prefiereMenosMovimiento = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
@@ -207,8 +336,9 @@
     // Puede llamarse dos veces (cuando el fetch resuelve y, si tarda
     // demasiado, cuando se cumple el tiempo de espera de respaldo).
     // Solo debe actuar una vez.
-    if (yaSeMostroConfirmacion) return;
-    yaSeMostroConfirmacion = true;
+    if (yaSeResolvio) return;
+    yaSeResolvio = true;
+    clearTimeout(esperaDeRespaldo);
 
     if (prefiereMenosMovimiento) {
       form.hidden = true;
@@ -226,9 +356,25 @@
     }, 200);
   }
 
+  // A diferencia de mostrarConfirmacion(), esto es un fallo de RED real
+  // (no la ambigüedad normal de "no-cors"): el formulario sigue visible,
+  // el botón se reactiva para reintentar, y se le explica qué pasó en vez
+  // de decirle "listo" cuando no se envió nada.
+  function mostrarErrorDeRed() {
+    if (yaSeResolvio) return;
+    yaSeResolvio = true;
+    clearTimeout(esperaDeRespaldo);
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Enviar";
+    status.textContent =
+      "No se pudo enviar por un problema de conexión. Inténtalo de nuevo o escríbenos directamente a angel.rodriguezln@uanl.edu.mx.";
+    status.className = "form-status form-status--error";
+  }
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    yaSeResolvio = false;
     submitBtn.disabled = true;
     submitBtn.textContent = "Enviando…";
     status.textContent = "";
@@ -243,16 +389,18 @@
     // práctica el fetch a veces nunca "resuelve" del todo aunque el dato
     // ya haya llegado a la hoja (por cómo Google redirige la respuesta).
     // Por eso no dependemos solo de que el fetch termine: si no resuelve
-    // en 3 segundos, mostramos la confirmación de todos modos.
+    // en 3 segundos, asumimos que sí llegó. Un fallo de red genuino (sin
+    // internet, DNS, etc.) sí se puede detectar antes de eso, y ahí se
+    // avisa de verdad en vez de fingir que se envió.
     fetch(GOOGLE_SHEETS_ENDPOINT, {
       method: "POST",
       mode: "no-cors",
       body: datos,
     })
       .then(mostrarConfirmacion)
-      .catch(mostrarConfirmacion);
+      .catch(mostrarErrorDeRed);
 
-    setTimeout(mostrarConfirmacion, 3000);
+    esperaDeRespaldo = setTimeout(mostrarConfirmacion, 3000);
   });
 })();
 
@@ -418,7 +566,18 @@
 
   resize();
   makeAgents();
-  start();
+
+  // Solo anima mientras la pestaña está visible Y el hero está en pantalla:
+  // evita gastar batería/CPU dibujando algo que nadie ve.
+  let tabVisible = !document.hidden;
+  let heroInView = true;
+
+  function sync() {
+    if (tabVisible && heroInView) start();
+    else stop();
+  }
+
+  sync();
 
   let resizeTimer = null;
   window.addEventListener("resize", () => {
@@ -430,7 +589,18 @@
   });
 
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stop();
-    else start();
+    tabVisible = !document.hidden;
+    sync();
   });
+
+  if ("IntersectionObserver" in window) {
+    const heroObserver = new IntersectionObserver(
+      (entries) => {
+        heroInView = entries[0].isIntersecting;
+        sync();
+      },
+      { threshold: 0 }
+    );
+    heroObserver.observe(hero);
+  }
 })();
