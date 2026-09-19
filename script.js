@@ -134,25 +134,32 @@
   }
 
   // Solo se descarga el set de fotos del dispositivo actual (desktop O
-  // celular, nunca los dos): las <img> nacen sin "src" (solo "data-src")
-  // y aquí se activa nada más el set que realmente se va a mostrar.
-  const pending = Array.from(carousel.querySelectorAll(".hero-slide")).map(
-    (img) =>
-      new Promise((resolve) => {
-        img.addEventListener("load", () => resolve(), { once: true });
-        img.addEventListener(
-          "error",
-          () => {
-            img.remove();
-            resolve();
-          },
-          { once: true }
-        );
-        img.src = img.dataset.src;
-      })
-  );
+  // celular, nunca los dos): las <img> nacen sin "src" (solo "data-src").
+  // Para que el hero se vea de inmediato (y no se quede en blanco varios
+  // segundos esperando ~10 fotos), se descarga primero solo la foto 1 y se
+  // arranca el carrusel en cuanto esa llega; el resto del set se sigue
+  // descargando en segundo plano, sin bloquear nada (cada foto tiene 5s de
+  // margen antes de que le toque salir en la rotación).
+  function loadSlide(img) {
+    return new Promise((resolve) => {
+      img.addEventListener("load", () => resolve(), { once: true });
+      img.addEventListener(
+        "error",
+        () => {
+          img.remove();
+          resolve();
+        },
+        { once: true }
+      );
+      img.src = img.dataset.src;
+    });
+  }
 
-  Promise.all(pending).then(start);
+  const imgs = Array.from(carousel.querySelectorAll(".hero-slide"));
+  if (!imgs.length) return;
+
+  loadSlide(imgs[0]).then(start);
+  imgs.slice(1).forEach(loadSlide);
 })();
 
 /* Publicaciones destacadas: botón para mostrar/ocultar las siguientes. */
