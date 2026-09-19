@@ -604,3 +604,155 @@
     heroObserver.observe(hero);
   }
 })();
+
+/* Eventos recientes: tarjetas con foto, en una fila que se recorre en
+   horizontal (hay lugar para meter todos los que quieras, no solo 3).
+   Para agregar/quitar un evento, edita el arreglo EVENTOS de abajo:
+   - fecha, titulo, imagen (dentro de /assets)
+   - enlace (opcional): a donde lleva la tarjeta al hacer click, por
+     ejemplo el post de Facebook de ese evento. Si lo dejas vacio, usa
+     la pagina de Facebook del CATIM.
+   No depende de internet ni de Facebook para mostrarse: es 100% manual
+   por ahora. El formato queda listo para, mas adelante, cambiar el
+   arreglo por un fetch("eventos.json") si se conecta una
+   sincronizacion automatica con la pagina de Facebook del CATIM. */
+(function () {
+  const FACEBOOK_CATIM = "https://www.facebook.com/catim.uanl";
+
+  const EVENTOS = [
+    {
+      fecha: "Julio 2026",
+      titulo: "Taller de robótica para niños en el Centro Familiar Amigos San Juan",
+      imagen: "assets/im1.jpg",
+      enlace: "https://www.facebook.com/share/p/1Bz2scg12Y/",
+    },
+    {
+      fecha: "Julio 2026",
+      titulo: "Pedro Guerra obtiene el primer lugar en el Verano de Investigación FIME 2026",
+      imagen: "assets/im2.jpg",
+      enlace: "https://www.facebook.com/share/p/1EwpuQWvnS/",
+    },
+    {
+      fecha: "Mayo 2026",
+      titulo: "El CATIM participa en el Verano de Investigación Científica y Tecnológica FIME 2026",
+      imagen: "assets/im3.jpg",
+      enlace: "https://www.facebook.com/share/p/18tJTidtH6/",
+    },
+    {
+      fecha: "Mayo 2026",
+      titulo: "Ángel Chávez Carrillo defiende tesis de Ingeniería Mecatrónica",
+      imagen: "assets/im4.jpg",
+      enlace: "https://www.facebook.com/share/p/1Bt3RJfLrX/",
+    },
+    {
+      fecha: "Mayo 2026",
+      titulo: "Ángel Nava Way defiende tesis de Ingeniería en Electrónica y Automatización",
+      imagen: "assets/im5.jpg",
+      enlace: "https://www.facebook.com/share/p/1DFUnSARjL/",
+    },
+    {
+      fecha: "Marzo 2026",
+      titulo: "El CATIM presente en el 7.º Congreso de Mecatrónica y Biomédica",
+      imagen: "assets/im6.jpg",
+      enlace: "https://www.facebook.com/share/p/1DPrxGAyLK/",
+    },
+    {
+      fecha: "Marzo 2026",
+      titulo: "El CATIM participa en el Segundo Foro de Ciencia, Tecnología e Innovación PIIT 2026",
+      imagen: "assets/im7.jpg",
+      enlace: "https://www.facebook.com/share/p/1dbb8PDK1g/",
+    },
+    {
+      fecha: "Marzo 2026",
+      titulo: "Exposición de robótica para el Taller CAST en UANL-SKYE Group",
+      imagen: "assets/im8.jpg",
+      enlace: "https://www.facebook.com/share/p/18iXSFt2YW/",
+    },
+    {
+      fecha: "Febrero 2026",
+      titulo: "Estancia doctoral en Francia: ciencia sin fronteras",
+      imagen: "assets/im9.jpg",
+      enlace: "https://www.facebook.com/share/p/1HCVDLkVxc/",
+    },
+    {
+      fecha: "Diciembre 2025",
+      titulo: "Seminario sobre monitoreo de contaminación atmosférica con drones (UAV)",
+      imagen: "assets/im10.jpg",
+      enlace: "https://www.facebook.com/share/p/1PbZfz1Zar/",
+    },
+  ];
+
+  const grid = document.getElementById("eventoGrid");
+  const toolbar = document.getElementById("eventToolbar");
+  const prevBtn = document.getElementById("eventPrev");
+  const nextBtn = document.getElementById("eventNext");
+  if (!grid) return;
+
+  if (!EVENTOS.length) {
+    grid.innerHTML =
+      '<p class="event-empty">Próximamente: fotos de nuestras actividades más recientes.</p>';
+    if (toolbar) toolbar.style.display = "none";
+    return;
+  }
+
+  grid.innerHTML = EVENTOS.map(
+    (ev) => `
+    <a class="event-card reveal" href="${ev.enlace || FACEBOOK_CATIM}" target="_blank" rel="noopener">
+      <div class="event-photo"><img src="${ev.imagen}" alt="" loading="lazy"></div>
+      <div class="event-body">
+        <span class="event-date">${ev.fecha}</span>
+        <h3>${ev.titulo}</h3>
+      </div>
+    </a>
+  `
+  ).join("");
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  /* Botones sutiles para recorrer los eventos con el scroll horizontal. */
+  if (prevBtn && nextBtn) {
+    const cardStep = () => {
+      const card = grid.querySelector(".event-card");
+      const gap = parseFloat(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap) || 0;
+      return card ? card.getBoundingClientRect().width + gap : 300;
+    };
+    const updateNavState = () => {
+      const maxScroll = grid.scrollWidth - grid.clientWidth - 1;
+      prevBtn.disabled = grid.scrollLeft <= 0;
+      nextBtn.disabled = maxScroll <= 0 || grid.scrollLeft >= maxScroll;
+    };
+    const scrollByStep = (dir) => {
+      grid.scrollBy({
+        left: dir * cardStep(),
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    };
+    prevBtn.addEventListener("click", () => scrollByStep(-1));
+    nextBtn.addEventListener("click", () => scrollByStep(1));
+    grid.addEventListener("scroll", updateNavState);
+    window.addEventListener("resize", updateNavState);
+    updateNavState();
+  }
+
+  const cards = grid.querySelectorAll(".reveal");
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    cards.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const eventObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          eventObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+  cards.forEach((el) => eventObserver.observe(el));
+})();

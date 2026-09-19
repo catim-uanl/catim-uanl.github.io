@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=37">
 </head>
 <body>
 
@@ -37,6 +37,7 @@
       <a href="#quienes">Quiénes somos</a>
       <a href="#lineas">Líneas</a>
       <a href="#programas">Programas</a>
+      <a href="#eventos">Eventos</a>
       <a href="#equipo">Equipo</a>
       <a href="#publicaciones">Publicaciones</a>
       <a href="#participa">Participa</a>
@@ -167,6 +168,24 @@
         <p>Ser un cuerpo académico consolidado, reconocido por su contribución en investigación, desarrollos tecnológicos y en la formación de recursos humanos.</p>
       </article>
     </div>
+  </section>
+
+  <!-- EVENTOS -->
+  <section class="section section--white" id="eventos" aria-labelledby="eventos-title">
+    <div class="section-rule" aria-hidden="true"></div>
+    <div class="section-head reveal">
+      <h2 id="eventos-title">Eventos recientes</h2>
+      <p class="section-lede">Actividades, congresos y visitas en las que ha participado el CATIM. Más fotos en nuestro <a href="https://www.facebook.com/catim.uanl" target="_blank" rel="noopener">Facebook</a> e <a href="https://www.instagram.com/catim.uanl/" target="_blank" rel="noopener">Instagram</a>.</p>
+    </div>
+    <div class="event-toolbar" id="eventToolbar">
+      <button type="button" class="event-nav event-nav--prev" id="eventPrev" aria-label="Evento anterior">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="event-nav event-nav--next" id="eventNext" aria-label="Evento siguiente">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="event-grid" id="eventoGrid"></div>
   </section>
 
   <!-- EQUIPO -->
@@ -503,6 +522,6 @@
   <p>Cuerpo Académico Tecnología e Innovación Mecatrónica (UANL-CA-272) · Facultad de Ingeniería Mecánica y Eléctrica · Universidad Autónoma de Nuevo León</p>
 </footer>
 
-<script src="script.js?v=12"></script>
+<script src="script.js?v=17"></script>
 </body>
 </html>
